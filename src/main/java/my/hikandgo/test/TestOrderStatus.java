@@ -31,7 +31,7 @@ public class TestOrderStatus {
 
         boolean result = objHomePage.statusNotFoundIsVisible();
 
-        Assert.assertEquals("Окно об отсутствие заказа не найдено", true, result);
+        Assert.assertTrue("Окно об отсутствие заказа не найдено", result);
 
     }
 
