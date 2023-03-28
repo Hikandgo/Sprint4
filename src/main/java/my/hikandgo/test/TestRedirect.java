@@ -2,6 +2,7 @@ package my.hikandgo.test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import my.hikandgo.POM.HomePage;
+import my.hikandgo.POM.StaticButtons;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class TestRedirect {
 
         HomePage objHomePage = new HomePage(driver);
 
-        objHomePage.clickOrderButtonTop();
+        driver.findElement(StaticButtons.buttonBottPath).click();
         objHomePage.clickLogo();
 
         String currUrl = objHomePage.getCurrentUrl();
@@ -59,13 +60,15 @@ public class TestRedirect {
             }
         }
 
-        boolean result = false;
-        if (currUrl.contains("yandex.ru") || currUrl.contains("dzen.ru") || currUrl.contains("ya.ru")) {
+        boolean result;
+        if (currUrl == null) {
+            result = false;
+        } else if (currUrl.contains("yandex.ru") || currUrl.contains("dzen.ru") || currUrl.contains("ya.ru")) {
             result = true;
         } else {
             result = false;
         }
 
-        Assert.assertEquals("URL отличается от yandex или dzen", result, true);
+        Assert.assertTrue("URL отличается от yandex или dzen", result);
     }
 }

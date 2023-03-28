@@ -1,16 +1,13 @@
 package my.hikandgo.POM;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class HomePage {
 
@@ -20,9 +17,6 @@ public class HomePage {
     // Текстовое поле элемента выпадающего списка
     private By textField = By.xpath("//div[@class='accordion__panel']/p");
     // Кнопка "Заказать" вверху страницы
-    private By orderButtonTop = By.xpath("//div[@class='Header_Nav__AGCXC']/button[@class='Button_Button__ra12g']");
-    // Кнопка "Заказать" внизу страницы
-    private By orderButtonBot = By.xpath("//div[@class='Home_FinishButton__1_cWm']/button");
     private By logoButton = By.xpath("//img[@alt='Scooter']");
     private By yandexButton = By.xpath("//img[@alt='Yandex']");
     private By statusButton = By.className("Header_Link__1TAG7");
@@ -32,14 +26,6 @@ public class HomePage {
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-    }
-
-    public void clickOrderButtonTop() {
-        driver.findElement(orderButtonTop).click();
-    }
-
-    public void clickOrderButtonBot() {
-        driver.findElement(orderButtonBot).click();
     }
 
     public List<WebElement> getAccordingButtons() {
@@ -52,13 +38,8 @@ public class HomePage {
         return list;
     }
 
-    public void scrollToAccording() {
-        WebElement element = driver.findElement(accordingElement);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-    }
-
-    public void scrollToBotButton() {
-        WebElement element = driver.findElement(orderButtonBot);
+    public void scrollTtoButton(By button) {
+        WebElement element = driver.findElement(button);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
@@ -85,4 +66,5 @@ public class HomePage {
     public boolean statusNotFoundIsVisible() {
         return driver.findElement(trackNotFound).isDisplayed();
     }
+
 }
