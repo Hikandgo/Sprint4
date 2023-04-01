@@ -10,10 +10,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -65,10 +68,13 @@ public class TestAccordingElements {
         List<WebElement> accordingList = objHomePage.getAccordingButtons();
         List<WebElement> textFieldsList = objHomePage.getTextFields();
 
+
         WebElement el = accordingList.get(count);
-        String exText = textFieldsList.get(count).getText();
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", el);
         el.click();
+        new WebDriverWait(driver, 3).until(ExpectedConditions.elementToBeClickable(textFieldsList.get(count)));
+
+        String exText = textFieldsList.get(count).getText();
         Assert.assertEquals("Текст элемента не соответствует техническому заданию", answer, exText);
     }
 }
